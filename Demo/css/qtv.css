@@ -1,0 +1,87 @@
+/* Tạo khoảng cách và căn chỉnh chung */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+/* Căn giữa nội dung trang */
+.container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+/* Tiêu đề */
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+/* Thẻ form và các input */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Các nhãn (label) */
+label {
+    font-size: 1.2em;
+    color: #333;
+}
+
+/* Các input và textarea */
+input[type="text"], input[type="number"], input[type="file"], select, textarea {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1em;
+    width: 100%;
+    box-sizing: border-box;
+}
+table{
+    margin-left:auto ;
+    margin-right: auto;
+}
+/* Các input cho nhiều lựa chọn (multi-select) */
+select[multiple] {
+    height: 100px;
+}
+
+/* Nút submit */
+button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    font-size: 1em;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+/* Định dạng khi form có lỗi */
+input:invalid, textarea:invalid {
+    border-color: red;
+}
+
+/* Thêm khoảng cách dưới mỗi phần tử */
+form > label, form > input, form > select, form > textarea {
+    margin-bottom: 10px;
+}
+
+/* Giới hạn chiều rộng cho trang */
+@media (max-width: 768px) {
+    .container {
+        width: 95%;
+    }
+}

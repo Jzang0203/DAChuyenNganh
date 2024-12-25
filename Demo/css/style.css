@@ -1,0 +1,457 @@
+/* RESET VÀ CẤU TRÚC CHUNG */
+html, body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* HEADER */
+header {
+    background: linear-gradient(to right, #027455, #7bbaa8);
+    color: #fff;
+    padding: 5px;
+    height: 170px;
+    text-align: center;
+}
+header h1 {
+    font-size: 60px;
+    font-family: 'Gill Sans MT';
+}
+.search-container {
+    float: right;
+    margin: -5px 10px 0 0;
+}
+#search-bar, #search-button {
+    padding: 3px;
+    border-radius: 4px;
+}
+#search-bar {
+    border: 1px solid #ccc;
+}
+#search-button {
+    background-color: #07d8b5;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+a {
+    text-decoration: none;
+    color: #fff;
+}
+
+/* NAVIGATION */
+.headerNAV ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+.headerNAV ul li {
+    position: relative;
+    margin-right: 20px;
+}
+.headerNAV ul li a {
+    color: white;
+    display: block;
+}
+.headerNAV ul li .dropdown {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: white;
+    padding: 0;
+    min-width: 150px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+.headerNAV ul li .dropdown li {
+    margin: 0;
+}
+.headerNAV ul li .dropdown li a {
+    color: black;
+    padding: 10px 15px;
+}
+.headerNAV ul li .dropdown li:hover {
+    background-color: #f1f1f1;
+}
+.headerNAV ul li:hover .dropdown {
+    display: block;
+}
+
+/* MAIN */
+main {
+    padding: 20px;
+}
+.center-content, .center-content-dkf {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.center-content {
+    height: calc(70vh - 160px);
+}
+.center-content-dkf {
+    height: calc(100vh - 180px);
+}
+
+/* SẢN PHẨM */
+.product, .sp, .checkout {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 15px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.sp, .checkout {
+    width: 300px; /* Giảm kích thước sản phẩm */
+    margin-right: 15px; /* Khoảng cách giữa các sản phẩm */
+    flex-shrink: 0; /* Đảm bảo sản phẩm không bị thu nhỏ */
+}
+
+.product {
+    position: relative; /* Đảm bảo rằng các nút slider nằm trong product */
+    overflow: hidden; /* Ẩn phần tràn nhưng không làm sản phẩm bị mất */
+
+}
+
+.product img {
+    width: 60%;
+}
+
+.product button {
+    background-color: #000;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.product button:hover {
+    background-color: aquamarine;
+}
+
+.sp:hover {
+    transform: translateY(-10px);
+    transition: 0.2s ease;
+}
+
+/* SLIDER */
+.product-slider {
+    display: flex;
+    scroll-behavior: smooth;
+    position: relative; /* Đảm bảo slider nằm trong parent */
+    padding: 0; /* Loại bỏ bất kỳ padding không mong muốn nào */
+}
+
+.sp {
+    flex: 0 0 auto; /* Đảm bảo các sản phẩm có kích thước cố định */
+    width: 400px; /* Chiều rộng của mỗi sản phẩm */
+    margin-right: 15px; /* Khoảng cách giữa các sản phẩm */
+}
+
+/* NÚT SLIDER */
+.slider-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    padding: 20px 20px;
+    cursor: pointer;
+    z-index: 10;
+    transition: background-color 0.2s ease;
+}
+
+.slider-btn:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.slider-btn.left {
+    left: 1px; /* Đặt nút trái ở bên trái, bên ngoài slider */
+}
+
+.slider-btn.right {
+    right: 1px; /* Đặt nút phải ở bên phải, bên ngoài slider */
+}
+
+/* RESPONSIVE SLIDER */
+@media (max-width: 768px) {
+    .sp {
+        width: 90%; /* Sản phẩm co giãn theo chiều rộng màn hình nhỏ */
+        margin-right: 10px; /* Khoảng cách giữa các sản phẩm nhỏ hơn */
+    }
+
+    /* Đảm bảo các nút vẫn ở vị trí chính xác */
+    .slider-btn {
+        padding: 8px 12px;
+    }
+}
+
+
+/* FOOTER */
+.footer {
+    bottom: 0; /* Äáº·t footer á»Ÿ dÆ°á»›i cĂ¹ng cá»§a trang */
+    width: 100%;
+    background:linear-gradient(to left ,#7bbaa8,  #027455);
+    color: #fff;
+    padding: 20px 0;
+}
+
+.footer h5 {
+    color: #fff;
+    font-size: 35px;
+}
+
+.footer .list-menu {
+    padding: 0;
+    list-style: none;
+}
+
+.footer .list-menu li {
+    margin-bottom: 10px;
+}
+
+.footer .list-menu li i {
+    margin-right: 10px;
+}
+
+.footer a {
+    color: #fff;
+}
+
+.footer a:hover {
+    text-decoration: underline;
+}
+
+.left {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding-left: 300px;
+}
+
+.info {
+    flex: 1;
+}
+
+.right {
+    flex: 1;
+    text-align: right;
+    padding-right: 300px;
+}
+
+.list-menu {
+    list-style-type: none;
+    padding: 0;
+}
+
+.list-menu li {
+    margin-bottom: 10px;
+}
+
+.fs,.fa-brands {
+    margin-right: 5px;
+}
+
+.ig {
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+.igt {
+    cursor: pointer;
+}
+.roww {
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    height: 100%; 
+}
+
+.roww > div {
+    text-align: center; 
+}
+
+/* BANNER */
+.Banner {
+    display: flex;
+    justify-content: space-between;
+}
+.Banner img {
+    max-width: 100%;
+    height: 300px;
+    transition: transform 0.3s ease;
+}
+.Banner img:hover {
+    transform: scale(1.1);
+}
+
+/* RESPONSIVE */
+@media (max-width: 1200px) {
+    .Banner {
+        flex-direction: column;
+    }
+    .sp {
+        width: 90%;
+    }
+    .left, .right {
+        padding: 0 10px;
+    }
+    header {
+        height: auto;
+    }
+}
+
+/*Contact*/
+.global-icon-right-zalo,
+.global-icon-right-facebook {
+    position: fixed; /* Giúp phần tử cố định theo màn hình */
+    bottom: 20px;    /* Cách mép dưới màn hình 20px */
+    right: 20px;     /* Cách mép phải màn hình 20px */
+    z-index: 1000;   /* Đảm bảo nằm trên các phần tử khác */
+}
+
+.global-icon-right-facebook {
+    bottom: 80px;    /* Đẩy icon Facebook lên trên icon Zalo */
+}
+
+/* Tùy chỉnh thêm hiệu ứng hover */
+.global-icon-right-zalo a img,
+.global-icon-right-facebook a img {
+    transition: transform 0.3s ease;
+}
+
+.global-icon-right-zalo a img:hover,
+.global-icon-right-facebook a img:hover {
+    transform: scale(1.1); /* Phóng to khi hover */
+}
+
+/* CTSP */
+/* Chi tiết sản phẩm */
+main.product-detail {
+    margin: 0 auto; /* Căn giữa toàn bộ */
+    max-width: auto; /* Giới hạn chiều rộng tối đa */
+    display: flex;
+    flex-wrap: nowrap; /* Không xuống dòng */
+    justify-content: space-between; /* Giãn cách đều */
+    align-items: flex-start; /* Căn theo chiều dọc */
+    background: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+main.product-detail .container {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 20px;
+    width: 100%; /* Chiếm toàn bộ không gian cha */
+    justify-content: space-evenly; /* Dàn đều phần tử trong container */
+}
+
+/* Phần bên trái: Hình ảnh sản phẩm */
+main.product-detail .left {
+    flex: 1; /* Sử dụng flex để tự động điều chỉnh chiều rộng */
+    max-width: 400px; /* Chiều rộng tối đa */
+    text-align: center;
+    padding-right: 20px;
+    border-right: 1px solid #f1f1f1;
+}
+
+main.product-detail .left .main-image {
+    width: 100%; /* Hình ảnh chính chiếm toàn bộ chiều rộng phần cha */
+    height: 400px; /* Đặt chiều cao cố định */
+    border-radius: 10px; /* Bo góc mềm mại */
+    object-fit: contain; /* Giữ tỷ lệ hình ảnh */
+    margin: 0 auto; /* Căn giữa hình ảnh */
+    border: 3px solid #000000;
+}
+
+main.product-detail .left .thumbnail-images {
+    display: flex;
+    justify-content: center; /* Căn giữa các hình ảnh nhỏ */
+    gap: 10px; /* Khoảng cách giữa các hình ảnh nhỏ */
+    margin-top: 15px;
+}
+
+main.product-detail .left .thumbnail {
+    width: 70px; /* Kích thước hình ảnh nhỏ */
+    height: 70px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+    object-fit: cover; /* Đảm bảo ảnh nhỏ giữ tỷ lệ */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+main.product-detail .left .thumbnail:hover {
+    transform: scale(1.2);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+/* Phần bên phải: Thông tin sản phẩm */
+main.product-detail .right {
+    flex: 2; /* Đặt phần phải chiếm 2/3 không gian so với phần trái */
+    padding-left: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+main.product-detail .right .product-title {
+    font-size: 28px;
+    font-weight: bold;
+    color: #027455;
+}
+
+main.product-detail .right .product-price {
+    font-size: 20px;
+    font-weight: bold;
+    color: #e63946;
+}
+
+main.product-detail .right .product-description {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #555;
+}
+
+main.product-detail .right .btn {
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    background-color: #027455;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+main.product-detail .right .btn:hover {
+    background-color: #7bbaa8;
+    transform: translateY(-3px);
+}
+
+main.product-detail .right .back-btn {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 8px 16px;
+    font-size: 14px;
+    color: #027455;
+    background-color: #f1f1f1;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+main.product-detail .right .back-btn:hover {
+    background-color: #027455;
+    color: white;
+}
