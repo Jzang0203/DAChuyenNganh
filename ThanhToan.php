@@ -14,54 +14,47 @@ if (!isset($_SESSION['cart']) || empty($_SESSION['cart'])) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    // Lấy thông tin thanh toán từ form
-    $fullname = htmlspecialchars($_POST['fullname']);
-    $address = htmlspecialchars($_POST['address']);
-    $phone = htmlspecialchars($_POST['phone']);
-    $note = isset($_POST['Node']) ? htmlspecialchars($_POST['Node']) : '';
-    $payment_method = $_POST['payment_method'];
-    $user_id = $_SESSION['ma_khachhang']; // Lấy mã khách hàng từ session
-    $total_amount = 0;
+    $ho_ten = htmlspecialchars($_POST['fullname']);
+    $DiaChi = htmlspecialchars($_POST['address']);
+    $SoDienThoai = htmlspecialchars($_POST['phone']);
+    $ghi_chu = isset($_POST['Node']) ? htmlspecialchars($_POST['Node']) : '';
+    $hinh_thuc_thanhtoan = $_POST['payment_method'];
+    $ma_khachhang = $_SESSION['ma_khachhang']; // Lấy mã khách hàng từ session
+    $tong_tien = 0;
 
-    // Tính tổng tiền đơn hàng từ giỏ hàng
-    foreach ($_SESSION['cart'] as $item) {
-        $total_amount += $item['quantity'] * $item['price'];
+    foreach ($_SESSION['cart'] as $san_pham) {
+        $tong_tien += $san_pham['quantity'] * $san_pham['price'];
     }
 
-    // Lấy mã nhân viên ngẫu nhiên từ cơ sở dữ liệu
     $stmt = $conn->prepare("SELECT ma_nhanvien FROM nhanvien ORDER BY RAND() LIMIT 1");
     $stmt->execute();
     $result = $stmt->get_result();
-    $staff_id = $result->fetch_assoc()['ma_nhanvien'];
+    $ma_nhanvien = $result->fetch_assoc()['ma_nhanvien'];
 
     $conn->begin_transaction();
 
     try {
         // Thêm đơn hàng vào bảng donhang
-        $stmt = $conn->prepare("INSERT INTO donhang (ma_nhanvien, ma_khachhang, tong_tien, trangthai) VALUES (?, ?, ?, 'Đang xử lý')");
-        $stmt->bind_param('ssi', $staff_id, $user_id, $total_amount);
+        $stmt = $conn->prepare("INSERT INTO donhang (ma_nhanvien, ma_khachhang,SoDienThoai,DiaChi,tong_tien, trangthai) VALUES (?, ?, ?, ?, ?, 'Đang xử lý')");
+        $stmt->bind_param('ssisi', $ma_nhanvien, $ma_khachhang,$SoDienThoai,$DiaChi,$tong_tien);
         $stmt->execute();
-        $order_id = $stmt->insert_id; // Lấy mã đơn hàng vừa thêm
+        $ma_donhang = $stmt->insert_id; // Lấy mã đơn hàng vừa thêm
 
-        // Lưu thông tin sản phẩm vào bảng chitietdonhang
-        foreach ($_SESSION['cart'] as $item) {
+        foreach ($_SESSION['cart'] as $san_pham) {
             $stmt = $conn->prepare("INSERT INTO chitietdonhang (ma_donhang, ma_sanpham, ma_size, ma_mau, so_luong, gia) VALUES (?, ?, ?, ?, ?, ?)");
-            $stmt->bind_param('iiiiii', $order_id, $item['id'], $item['size'], $item['color'], $item['quantity'], $item['price']);
+            $stmt->bind_param('iiiiii', $ma_donhang, $san_pham['id'], $san_pham['size'], $san_pham['color'], $san_pham['quantity'], $san_pham['price']);
             $stmt->execute();
         }
 
-        // Lưu thông tin giao dịch thanh toán vào bảng giaodichthanhtoan
+
         $stmt = $conn->prepare("INSERT INTO giaodichthanhtoan (ma_donhang, hinhthuc_thanhtoan, ngay_thanhtoan, trangthai) VALUES (?, ?, NOW(), 'Đang xử lý')");
-        $stmt->bind_param('is', $order_id, $payment_method);
+        $stmt->bind_param('is', $ma_donhang, $hinh_thuc_thanhtoan);
         $stmt->execute();
 
-        // Xác nhận giao dịch
         $conn->commit();
 
-        // Xóa giỏ hàng sau khi thanh toán
         unset($_SESSION['cart']);
 
-        // Chuyển hướng về trang index sau khi thanh toán thành công
         header('Location: index.php');
         exit;
 
@@ -79,10 +72,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <h1 class="title">Thông tin thanh toán</h1>
     <h2 class="subtitle">Sản phẩm trong giỏ hàng:</h2>
     <ul class="cart-list">
-        <?php foreach ($_SESSION['cart'] as $item): ?>
+        <?php foreach ($_SESSION['cart'] as $san_pham): ?>
             <li class="cart-item">
-                <strong><?php echo htmlspecialchars($item['name']); ?></strong> - <?php echo $item['quantity']; ?> x <?php echo number_format($item['price'], 0, ',', '.'); ?> $
-                <br><span>Màu sắc: <?php echo htmlspecialchars($item['color']); ?>, Kích thước: <?php echo htmlspecialchars($item['size']); ?></span>
+                <strong><?php echo htmlspecialchars($san_pham['name']); ?></strong> - <?php echo $san_pham['quantity']; ?> x <?php echo number_format($san_pham['price'], 0, ',', '.'); ?> $
+                <br><span>Màu sắc: <?php echo htmlspecialchars($san_pham['color']); ?>, Kích thước: <?php echo htmlspecialchars($san_pham['size']); ?></span>
             </li>
         <?php endforeach; ?>
     </ul>
@@ -129,14 +122,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         checkoutForm.addEventListener('submit', function(event) {
             event.preventDefault(); // Ngăn chặn gửi dữ liệu mặc định của form
 
-            const fullname = document.querySelector('#fullname').value;
-            const address = document.querySelector('#address').value;
-            const phone = document.querySelector('#phone').value;
-            const note = document.querySelector('#Node').value;
-            const paymentMethod = document.querySelector('input[name="payment_method"]:checked');
+            const hoTen = document.querySelector('#fullname').value;
+            const diaChi = document.querySelector('#address').value;
+            const soDienThoai = document.querySelector('#phone').value;
+            const ghiChu = document.querySelector('#Node').value;
+            const hinhThucThanhToan = document.querySelector('input[name="payment_method"]:checked');
 
             // Kiểm tra nếu các trường bắt buộc đã được điền đầy đủ và phương thức thanh toán đã được chọn
-            if (fullname && address && phone && paymentMethod) {
+            if (hoTen && diaChi && soDienThoai && hinhThucThanhToan) {
                 alert('Thanh toán thành công!');
                 checkoutForm.submit(); // Nếu bạn muốn gửi form thực tế
             } else {

@@ -2,7 +2,6 @@
 <?php include '../connect.php'; ?>
 
 <main>
-    <hr>
     <br><br>
     <h2 style="font-size: 36px; text-align: center; color: #333;">Quản lý sản phẩm</h2> <!-- Tăng kích thước chữ -->
     <div class="manage-options" style="text-align: center; margin-bottom: 30px;">

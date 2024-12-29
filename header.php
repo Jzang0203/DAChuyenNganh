@@ -16,18 +16,20 @@
             <button id="search-button">Search</button>
             <button><a href="/cart.php">
                 <img src="/Demo/img/Banner/shoppingcart.png" width="12" height="12">
+                
                 <!-- Hiển thị số lượng giỏ hàng -->
                 <?php if (isset($_SESSION['cart']) && count($_SESSION['cart']) > 0): ?>
-                    <span class="cart-count"><?php echo count($_SESSION['cart']); ?></span>
+                    <span class="cart-count" style="color:black"><?php echo count($_SESSION['cart']); ?></span>
                 <?php endif; ?>
             </a></button>
         </div>
         <nav class="headerNAV">
             <ul>
                 <?php if (isset($_SESSION['ma_quantrivien'])): ?>
-                    <li><a href="/Admin/admin.php">Home</a></li>
+                    <li><a href="/Admin/admin.php">Quản Lý Giày</a></li>
+                    <li><a href="/Admin/QLTK.php">Quản Lý Khách Hàng</a></li>
                 <?php elseif (isset($_SESSION['ma_nhanvien'])): ?>
-                    <li><a href="/Nhanvien.php">Home</a></li>
+                    <li><a href="/Nhanvien.php">Quản lý đơn hàng</a></li>
                 <?php else: ?>
                     <li><a href="/index.php">Home</a></li>
                 <?php endif; ?>
@@ -65,7 +67,6 @@
     </header>
 
     <script>
-        // Code JavaScript để xử lý chức năng tìm kiếm nếu cần
         document.getElementById('search-button').addEventListener('click', function() {
             var searchQuery = document.getElementById('search-bar').value;
             if (searchQuery) {

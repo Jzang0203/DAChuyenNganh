@@ -76,4 +76,3 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_status'])) {
     </table>
 </main>
 
-<?php include 'footer.php'; ?>

@@ -82,7 +82,7 @@ if ($result->num_rows > 0) {
             <!-- Thêm vào giỏ hàng -->
             <button class="btn" onclick="addToCart(<?php echo $product['ma_sanpham']; ?>, '<?php echo addslashes($product['ten_sanpham']); ?>', <?php echo $product['gia']; ?>)">Thêm vào giỏ hàng</button>
             
-            <a href="index.php" class="back-btn">Quay lại trang chủ</a>
+            <a href="javascript:history.back()" class="back-btn">Quay lại trang chủ</a>
         </div>
     </div>
 </main>

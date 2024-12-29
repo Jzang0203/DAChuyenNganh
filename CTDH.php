@@ -14,7 +14,7 @@ if (!isset($_GET['ma_donhang'])) {
 }
 $ma_donhang = $_GET['ma_donhang'];
 
-$sql_order = "SELECT dh.*, kh.ten_khachhang, kh.diachi, kh.sodienthoai, gd.ngay_thanhtoan
+$sql_order = "SELECT dh.*, kh.ten_khachhang, dh.DiaChi, dh.SoDienThoai, gd.ngay_thanhtoan
               FROM donhang dh
               JOIN khachhang kh ON dh.ma_khachhang = kh.ma_khachhang
               JOIN giaodichthanhtoan gd ON dh.ma_donhang = gd.ma_donhang
@@ -55,8 +55,8 @@ $result_items = $stmt_items->get_result();
     <div style="margin-bottom: 20px;">
         <h3>Thông Tin Khách Hàng</h3>
         <p><strong>Tên Khách Hàng:</strong> <?php echo $order['ten_khachhang']; ?></p>
-        <p><strong>Địa Chỉ:</strong> <?php echo $order['diachi']; ?></p>
-        <p><strong>Số Điện Thoại:</strong> <?php echo $order['sodienthoai']; ?></p>
+        <p><strong>Địa Chỉ:</strong> <?php echo $order['DiaChi']; ?></p>
+        <p><strong>Số Điện Thoại:</strong> <?php echo $order['SoDienThoai']; ?></p>
     </div>
 
     <!-- Danh Sách Sản Phẩm -->
